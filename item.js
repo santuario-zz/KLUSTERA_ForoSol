@@ -1,4 +1,4 @@
-function Item(_x, _y, _r) {
+function Item(_x, _y, _r, _lineID) {
   /*
    *****************************************
    *****************************************
@@ -9,12 +9,30 @@ function Item(_x, _y, _r) {
 
   this.position = createVector(_x, _y);
   this.r = _r;
+  this.lineID = _lineID;
   this.origposition = createVector(_x, _y);
   this.velocity = createVector(0, 0);
   this.holding = false;
   this.targetPosition = createVector(0, 0);
   this.discriminator = 1.5;
+  this.currentColor = color(255, 255, 255, 255); //blanco
+  this.colors = [];
 
+  this.colors.push(color(255, 255, 255, 255)); //blanco
+  this.colors.push(color(220, 0, 4, 200));
+  this.colors.push(color(108, 59, 25, 200));
+  this.colors.push(color(254, 216, 47, 200));
+  this.colors.push(color(175, 43, 15, 200));
+  this.colors.push(color(170, 48,75, 200));
+
+
+  this.currentColor = this.colors[int(this.lineID)];
+
+
+  /*
+  if(this.lineID == "1"){
+    this.currentColor = color(220, 0, 4, 200); //Rojo
+  }*/
 
   /*
    *****************************************
@@ -32,7 +50,7 @@ function Item(_x, _y, _r) {
 
   this.display = function() {
     noStroke();
-    fill(150, 220);
+    fill(this.currentColor);
 
 
     ellipse(this.position.x, this.position.y, this.r * 2, this.r * 2);

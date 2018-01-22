@@ -55,6 +55,9 @@ var lines = [];
 var showPaths = true;
 
 
+var colors = [];
+
+
 
 
 /*
@@ -140,6 +143,9 @@ function draw() {
 
 function initialize() {
 
+
+
+  initializeColors();
   initializeTable();
   initializeBackground();
   initializeLocator();
@@ -150,6 +156,22 @@ function initialize() {
 
 }
 
+/*
+ *****************************************
+ *****************************************
+ * COLOR ARRAY METHODS
+ *****************************************
+ *****************************************
+ */
+
+function initializeColors() {
+  colors.push(color(255, 255, 255, 255)); //blanco
+  colors.push(color(220, 0, 4, 200));
+  colors.push(color(108, 59, 25, 200));
+  colors.push(color(254, 216, 47, 200));
+  colors.push(color(175, 43, 15, 200));
+  colors.push(color(170, 48, 75, 200));
+}
 
 
 /*
@@ -273,24 +295,49 @@ function drawPoints() {
     if (typeof lines[i][index] != 'undefined' && typeof lines[i][index + 1] != 'undefined') {
 
       var firstP = createVector(windowWidth / 2 - lines[i][index].getNum("x"), windowHeight / 2 - lines[i][index].getNum("y"));
-
       var secondP = createVector(windowWidth / 2 - lines[i][index + 1].getNum("x"), windowHeight / 2 - lines[i][index + 1].getNum("y"));
-
-
 
       var px = lerp(firstP.x, secondP.x, progress - index);
       var py = lerp(firstP.y, secondP.y, progress - index);
 
-
-
       currentPositions[i] = createVector(px, py);
 
-      fill(150, 220);
+      var currentColor = colors[int(lines[i][index].getNum("line"))];
+
+      fill(currentColor);
       noStroke();
+
+      if (currentPositions[i].x > windowWidth || currentPositions[i].x < 0 || currentPositions[i].y > windowHeight || currentPositions[i].y < 0) {
+        //print(i + " AFUERA");
+
+        //Title
+        textFont(geoMidFont);
+        textSize(24);
+
+
+        if (currentPositions[i].y > windowHeight && currentPositions[i].x > 0) {
+          text(lines[i][index].getString("origin"), currentPositions[i].x, windowHeight - 60);
+          triangle(currentPositions[i].x - 30 / 2, -5 + windowHeight - 75 / 2, currentPositions[i].x - 58 / 2, -5 + windowHeight - 20 / 2, currentPositions[i].x - 86 / 2, -5 + windowHeight - 75 / 2);
+        }
+
+        if (currentPositions[i].y < 0) {
+          text(lines[i][index].getString("origin"), currentPositions[i].x, 25);
+          triangle(currentPositions[i].x - 30 / 2, 80 - 75 / 2, currentPositions[i].x - 58 / 2, 80 - 130 / 2, currentPositions[i].x - 86 / 2, 80 - 75 / 2);
+
+        }
+
+        if (currentPositions[i].x < 0) {
+          text(lines[i][index].getString("origin"), 60, currentPositions[i].y - 55);
+          triangle(60 - 30 / 2, currentPositions[i].y - 75 / 2, 60 - 58 / 2, currentPositions[i].y - 20 / 2, 60 - 86 / 2, currentPositions[i].y - 75 / 2);
+
+        }
+
+
+
+      }
 
       ellipse(currentPositions[i].x, currentPositions[i].y, 8, 8);
 
-      currentPosition = createVector(px, py);
 
 
 
@@ -409,7 +456,7 @@ function initializeKeyPoints() {
     for (var i = 0; i < lines[k].length; i++) {
       //print(lines[k][i].getString("key"));
       if (lines[k][i].getString("key") == 'YES') {
-        var p = createVector(lines[k][i].getNum("x"), lines[k][i].getNum("y"));
+        var p = createVector(lines[k][i].getNum("x"), lines[k][i].getNum("y"), lines[k][i].getNum("line"));
         keyPointsTMP.push(p);
       }
     }
@@ -429,9 +476,13 @@ function drawKeyPoints() {
       if (d < 20) {
         // Keypoints
 
+        var currentColor = color(255, 255, 255, 200);
+
+        currentColor = colors[int(keyPoints[k][i].z)];
+
         var posX = -80;
         var posY = 180;
-        fill(255)
+        fill(currentColor)
 
         var itemPosX = (windowWidth / 2) - keyPoints[k][i].x;
         var itemPosY = (windowHeight / 2) - keyPoints[k][i].y;
@@ -448,7 +499,7 @@ function drawKeyPoints() {
 
 
         //Stroke
-        stroke(255, 255, 255, 255);
+        stroke(currentColor);
         strokeWeight(2);
         line(itemPosX, itemPosY, itemPosX - posX, itemPosY - posY + 40);
 
@@ -482,7 +533,7 @@ function initializeItems() {
 
       var s = floor(random(2, 10));
       //itemsTMP.push(new Item(windowWidth / 2 - lines[i][0].getNum("x"), windowHeight / 2 - lines[i][0].getNum("y")));
-      itemsTMP.push(new Item(floor(random(s, windowWidth - s)), floor(random(s, windowHeight - s)), s));
+      itemsTMP.push(new Item(floor(random(s, windowWidth - s)), floor(random(s, windowHeight - s)), s, lines[i][j].getString("line")));
       //itemsTMP.push(new Item(currentPositions[i].x,currentPositions[i].y));
 
     }
