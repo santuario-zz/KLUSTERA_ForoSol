@@ -13,6 +13,7 @@ function Item(_x, _y, _r) {
   this.velocity = createVector(0, 0);
   this.holding = false;
   this.targetPosition = createVector(0, 0);
+  this.discriminator = 1.5;
 
 
   /*
@@ -45,7 +46,7 @@ function Item(_x, _y, _r) {
     this.velocity.mult(0.91);
 
 
-    if (this.position.x < this.origposition.x - 1.5 || this.position.x > this.origposition.x + 1.5 || this.position.y < this.origposition.y - 1.5 || this.position.y > this.origposition.y + 1.5) {
+    if (this.position.x < this.origposition.x - this.discriminator || this.position.x > this.origposition.x + this.discriminator || this.position.y < this.origposition.y - this.discriminator || this.position.y > this.origposition.y + this.discriminator) {
       var normal = p5.Vector.sub(createVector(this.targetPosition.x, this.targetPosition.y), this.position);
       normal.normalize();
       this.velocity.add(normal);

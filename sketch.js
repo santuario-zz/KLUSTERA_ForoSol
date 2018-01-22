@@ -51,6 +51,10 @@ var table
 var lines = [];
 
 
+// UI
+var showPaths = true;
+
+
 
 
 /*
@@ -65,6 +69,15 @@ var lines = [];
 function preload() {
   // Backgrund
   backgroundImage = loadImage("assets/images/MapTepeyacDark.png");
+
+
+  //KeyItems
+
+  for (var i = 0; i < 2; i++) {
+    var nameImage = "assets/images/KeyPoints_" + i + "_0.png";
+    window['imgKeyPoints_' + i + "_0"] = loadImage(nameImage);
+  }
+
 
   // Locator
   locatorImage = loadImage("assets/images/location.png");
@@ -238,15 +251,18 @@ function drawPoints() {
 
     noFill();
     stroke(128);
-    beginShape();
 
-    for (var j = 0; j < lines[i].length; j++) {
-      vertex(windowWidth / 2 - lines[i][j].getNum("x"), windowHeight / 2 - lines[i][j].getNum("y"));
+    if (showPaths) {
+
+      beginShape();
+
+      for (var j = 0; j < lines[i].length; j++) {
+        vertex(windowWidth / 2 - lines[i][j].getNum("x"), windowHeight / 2 - lines[i][j].getNum("y"));
+      }
+
+      endShape(CLOSE);
+
     }
-
-    endShape(CLOSE);
-
-
 
 
     var progress = map(mouseX, 0, windowWidth, 0, lines[i].length - 1);
@@ -269,10 +285,10 @@ function drawPoints() {
 
       currentPositions[i] = createVector(px, py);
 
-      fill(255);
+      fill(150, 220);
       noStroke();
 
-      ellipse(currentPositions[i].x, currentPositions[i].y, 20, 20);
+      ellipse(currentPositions[i].x, currentPositions[i].y, 8, 8);
 
       currentPosition = createVector(px, py);
 
@@ -412,7 +428,30 @@ function drawKeyPoints() {
       var d = dist((windowWidth / 2) - keyPoints[k][i].x, (windowHeight / 2) - keyPoints[k][i].y, currentPositions[k].x, currentPositions[k].y);
       if (d < 20) {
         // Keypoints
-        ellipse((windowWidth / 2) - keyPoints[k][i].x, (windowHeight / 2) - keyPoints[k][i].y, 50, 50);
+
+        var posX = -80;
+        var posY = 180;
+        fill(255)
+
+        var itemPosX = (windowWidth / 2) - keyPoints[k][i].x;
+        var itemPosY = (windowHeight / 2) - keyPoints[k][i].y;
+        ellipse(itemPosX, itemPosY, 20, 20);
+
+        //Title
+
+        textAlign(LEFT, CENTER);
+        textFont(geoMidFont);
+        textSize(24);
+        //text("Agasis", itemPosX - posX, itemPosY - posY);
+
+        image(window['imgKeyPoints_' + k + "_0"], itemPosX - posX, itemPosY - posY);
+
+
+        //Stroke
+        stroke(255, 255, 255, 255);
+        strokeWeight(2);
+        line(itemPosX, itemPosY, itemPosX - posX, itemPosY - posY + 40);
+
       }
     }
   }
@@ -441,7 +480,7 @@ function initializeItems() {
 
     for (var j = 0; j < lines[i][0].getNum("count"); j++) {
 
-      var s = floor(random(5, 25));
+      var s = floor(random(2, 10));
       //itemsTMP.push(new Item(windowWidth / 2 - lines[i][0].getNum("x"), windowHeight / 2 - lines[i][0].getNum("y")));
       itemsTMP.push(new Item(floor(random(s, windowWidth - s)), floor(random(s, windowHeight - s)), s));
       //itemsTMP.push(new Item(currentPositions[i].x,currentPositions[i].y));
@@ -510,10 +549,21 @@ function initializeTable() {
 
 function mouseClicked() {
   // initializeItems();
- // print("MIAU");
+  // print("MIAU");
   // print(((windowWidth / 2) - mouseX) + " :: " + mouseX + " , " + ((windowHeight / 2) - mouseY) + " :: " + mouseY);
 
-  //print(((windowWidth / 2) - mouseX) + "," +  ((windowHeight / 2) - mouseY));
+  //print(((windowWidth / 2) - mouseX) + "," + ((windowHeight / 2) - mouseY));
 
 
+}
+
+
+function keyPressed() {
+  if (keyCode == 32) {
+    // SPACE
+    showPaths = !showPaths;
+
+  }
+
+  return false;
 }
