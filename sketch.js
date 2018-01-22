@@ -43,10 +43,12 @@ var geoMidFont
 var geoSmallFont;
 
 var currentPosition;
+var currentPositions = [];
 
 
 // Table
 var table
+var lines = [];
 
 
 
@@ -87,6 +89,7 @@ function windowResized() {
 
   initializePoints();
   initializeKeyPoints();
+  //initializeItems();
 }
 
 
@@ -201,59 +204,90 @@ function drawLocator() {
 
 
 function initializePoints() {
-  points.length = 0;
-  for (var i = 0; i < 10; i++) {
-    var p = createVector(random(0, windowWidth), random(0, windowHeight));
-    points.push(p);
+
+  //print(table.getNum(0, 5));
+
+  for (var r = 0; r < table.getRowCount(); r++) {
+
+
+
   }
+
+  lines.length = 0;
+
+  for (var i = 0; i < table.getNum(0, 5); i++) {
+    var rows = table.findRows(str(i + 1), 'line');
+    lines.push(rows);
+  }
+
+
+  //print(lines[0][0].getString("x"));
+  //print(lines[0].length );
+
+
+
 }
 
 
 
 function drawPoints() {
 
-  noFill();
-  stroke(128);
-  beginShape();
+  // currentPositions.length = 0;
 
-  for (var i = 0; i < points.length; i++) {
-    vertex(points[i].x, points[i].y);
-  }
-  endShape(CLOSE);
+  for (var i = 0; i < table.getNum(0, 5); i++) {
 
+    noFill();
+    stroke(128);
+    beginShape();
 
+    for (var j = 0; j < lines[i].length; j++) {
+      vertex(windowWidth / 2 - lines[i][j].getNum("x"), windowHeight / 2 - lines[i][j].getNum("y"));
+    }
 
-
-  var progress = map(mouseX, 0, windowWidth, 0, points.length - 1);
-  var index = floor(progress);
-
-  var firstP = points[index];
-  var secondP = points[index + 1];
-
-  if (typeof firstP != 'undefined' && typeof secondP != 'undefined') {
-    var px = lerp(firstP.x, secondP.x, progress - index);
-    var py = lerp(firstP.y, secondP.y, progress - index);
+    endShape(CLOSE);
 
 
 
 
-
-    fill(255);
-    noStroke();
-
-    ellipse(px, py, 20, 20);
-
-    currentPosition = createVector(px, py);
+    var progress = map(mouseX, 0, windowWidth, 0, lines[i].length - 1);
+    var index = floor(progress);
 
 
-    for (var i = 0; i < random(30); i++) {
 
-      var deltaX = random(-i * 5, i * 5);
-      var deltaY = random(-i * 5, i * 5);
-      ellipse(px + deltaX, py + deltaY, 5, 5); // Draw the point we were looking for
+    if (typeof lines[i][index] != 'undefined' && typeof lines[i][index + 1] != 'undefined') {
+
+      var firstP = createVector(windowWidth / 2 - lines[i][index].getNum("x"), windowHeight / 2 - lines[i][index].getNum("y"));
+
+      var secondP = createVector(windowWidth / 2 - lines[i][index + 1].getNum("x"), windowHeight / 2 - lines[i][index + 1].getNum("y"));
+
+
+
+      var px = lerp(firstP.x, secondP.x, progress - index);
+      var py = lerp(firstP.y, secondP.y, progress - index);
+
+
+
+      currentPositions[i] = createVector(px, py);
+
+      fill(255);
+      noStroke();
+
+      ellipse(currentPositions[i].x, currentPositions[i].y, 20, 20);
+
+      currentPosition = createVector(px, py);
+
+
+
 
     }
+
   }
+
+
+
+
+
+
 
 
 
@@ -354,31 +388,36 @@ function drawClock() {
 function initializeKeyPoints() {
   keyPoints.length = 0;
 
-  for (var i = 0; i < 5; i++) {
-    var p = createVector(random(0, windowWidth), random(0, windowHeight));
-    keyPoints.push(points[i]);
+  for (var k = 0; k < table.getNum(0, 5); k++) {
+    var keyPointsTMP = [];
+    for (var i = 0; i < lines[k].length; i++) {
+      //print(lines[k][i].getString("key"));
+      if (lines[k][i].getString("key") == 'YES') {
+        var p = createVector(lines[k][i].getNum("x"), lines[k][i].getNum("y"));
+        keyPointsTMP.push(p);
+      }
+    }
+
+    keyPoints[k] = keyPointsTMP;
   }
+
 }
 
 
 
 function drawKeyPoints() {
 
-  //var progress = map(mouseX, 0, windowWidth, 0, 100);
-
-  // print(currentPosition.x + ", " + currentPosition.y);
-
-  for (var i = 0; i < keyPoints.length; i++) {
-
-
-    var d = dist(keyPoints[i].x, keyPoints[i].y, currentPosition.x, currentPosition.y);
-
-    if (d < 20) {
-      ellipse(keyPoints[i].x, keyPoints[i].y, 50, 50);
-
+  for (var k = 0; k < table.getNum(0, 5); k++) {
+    for (var i = 0; i < keyPoints[k].length; i++) {
+      var d = dist((windowWidth / 2) - keyPoints[k][i].x, (windowHeight / 2) - keyPoints[k][i].y, currentPositions[k].x, currentPositions[k].y);
+      if (d < 20) {
+        // Keypoints
+        ellipse((windowWidth / 2) - keyPoints[k][i].x, (windowHeight / 2) - keyPoints[k][i].y, 50, 50);
+      }
     }
-
   }
+
+
 
 }
 
@@ -396,25 +435,49 @@ function initializeItems() {
 
   items.length = 0;
 
-  for (var i = 0; i < itemsCount; i++) {
-    var s = floor(random(5, 25));
-    items.push(new Item(floor(random(s, windowWidth - s)), floor(random(s, windowHeight - s)), s));
+  for (var i = 0; i < table.getNum(0, 5); i++) {
+
+    var itemsTMP = [];
+
+    for (var j = 0; j < lines[i][0].getNum("count"); j++) {
+
+      var s = floor(random(5, 25));
+      //itemsTMP.push(new Item(windowWidth / 2 - lines[i][0].getNum("x"), windowHeight / 2 - lines[i][0].getNum("y")));
+      itemsTMP.push(new Item(floor(random(s, windowWidth - s)), floor(random(s, windowHeight - s)), s));
+      //itemsTMP.push(new Item(currentPositions[i].x,currentPositions[i].y));
+
+    }
+
+    items[i] = itemsTMP;
+
 
   }
+
+
+  // print(items[0].length);
+
+
 
 }
 
 
 function drawItems() {
-  for (var i = 0; i < items.length; i++) {
-    items[i].targetPosition = currentPosition;
-    items[i].update();
-    items[i].display();
-    items[i].checkBoundaryCollision();
-    for (var j = 0; j < items.length; j++) {
-      items[j].checkCollision(items[i]);
+
+
+  for (var k = 0; k < table.getNum(0, 5); k++) {
+
+    for (var i = 0; i < items[k].length; i++) {
+      items[k][i].targetPosition = currentPositions[k];
+      items[k][i].update();
+      items[k][i].display();
+      items[k][i].checkBoundaryCollision();
+      for (var j = 0; j < items[k].length; j++) {
+        items[k][j].checkCollision(items[k][i]);
+      }
     }
   }
+
+
 }
 
 
@@ -446,10 +509,11 @@ function initializeTable() {
  */
 
 function mouseClicked() {
-  initializeItems();
-  //print("MIAU");
-  print(((windowWidth / 2) - mouseX) + " :: " + mouseX + " , " + ((windowHeight / 2) - mouseY) + " :: " + mouseY);
+  // initializeItems();
+ // print("MIAU");
+  // print(((windowWidth / 2) - mouseX) + " :: " + mouseX + " , " + ((windowHeight / 2) - mouseY) + " :: " + mouseY);
 
+  //print(((windowWidth / 2) - mouseX) + "," +  ((windowHeight / 2) - mouseY));
 
 
 }
