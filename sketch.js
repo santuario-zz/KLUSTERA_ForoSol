@@ -5,6 +5,7 @@
  * Klustera
  * Adrian Santuario
  *
+ * Test: https://santuario.github.io/KLUSTERA_Coca-Cola_Stores/
  */
 
 
@@ -19,6 +20,13 @@
 
 // Background
 var backgroundImage;
+
+// Header
+var logoHeader;
+
+
+// Locator
+var locatorImage;
 
 // Points
 var points = [];
@@ -37,6 +45,11 @@ var geoSmallFont;
 var currentPosition;
 
 
+// Table
+var table
+
+
+
 
 /*
  *****************************************
@@ -49,18 +62,29 @@ var currentPosition;
 
 function preload() {
   // Backgrund
-  backgroundImage = loadImage("assets/images/MapDark.png");
+  backgroundImage = loadImage("assets/images/MapTepeyacDark.png");
+
+  // Locator
+  locatorImage = loadImage("assets/images/location.png");
+
+  //Header
+  logoHeader = loadImage("assets/images/cocacola.png");
 
 
-  // Fuemtes
+  // Fonts
   geoMidFont = loadFont('assets/fonts/Geogtq-Md.otf');
   geoSmallFont = loadFont('assets/fonts/Geogtq-Ul.otf');
 
+
+  // table
+  table = loadTable('assets/data/paths.csv', 'csv', 'header');
 
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+
+
   initializePoints();
   initializeKeyPoints();
 }
@@ -77,10 +101,13 @@ function draw() {
 
 
   drawBackground();
+  drawLocator();
   drawPoints();
   drawKeyPoints();
   drawClock();
   drawItems();
+
+
 
 }
 
@@ -97,7 +124,9 @@ function draw() {
 
 function initialize() {
 
+  initializeTable();
   initializeBackground();
+  initializeLocator();
   initializePoints();
   initializeClock();
   initializeKeyPoints();
@@ -134,6 +163,33 @@ function drawBackground() {
 }
 
 
+/*
+ *****************************************
+ *****************************************
+ * LOCATOR METHODS
+ *****************************************
+ *****************************************
+ */
+
+
+function initializeLocator() {
+
+
+}
+
+
+
+function drawLocator() {
+
+  /*
+    var correctionXS = (windowWidth / 2) - (locatorImage.width / 2);
+    var correctionYS = (windowHeight / 2) - (locatorImage.height / 2);
+  */
+  image(locatorImage, windowWidth / 2 - 5, windowHeight / 2 - 5);
+
+}
+
+
 
 /*
  *****************************************
@@ -166,37 +222,45 @@ function drawPoints() {
   endShape(CLOSE);
 
 
+
+
   var progress = map(mouseX, 0, windowWidth, 0, points.length - 1);
   var index = floor(progress);
 
   var firstP = points[index];
   var secondP = points[index + 1];
 
-  var px = lerp(firstP.x, secondP.x, progress - index);
-  var py = lerp(firstP.y, secondP.y, progress - index);
-
-
-  fill(255);
-  noStroke();
-
-  ellipse(px, py, 20, 20);
-
-  currentPosition = createVector(px, py);
+  if (typeof firstP != 'undefined' && typeof secondP != 'undefined') {
+    var px = lerp(firstP.x, secondP.x, progress - index);
+    var py = lerp(firstP.y, secondP.y, progress - index);
 
 
 
 
-  for (var i = 0; i < random(30); i++) {
+
+    fill(255);
+    noStroke();
+
+    ellipse(px, py, 20, 20);
+
+    currentPosition = createVector(px, py);
 
 
+    for (var i = 0; i < random(30); i++) {
 
-    var deltaX = random(-i * 5, i * 5);
-    var deltaY = random(-i * 5, i * 5);
-    ellipse(px + deltaX, py + deltaY, 5, 5); // Draw the point we were looking for
+      var deltaX = random(-i * 5, i * 5);
+      var deltaY = random(-i * 5, i * 5);
+      ellipse(px + deltaX, py + deltaY, 5, 5); // Draw the point we were looking for
 
-
-
+    }
   }
+
+
+
+
+
+
+
 
 
 }
@@ -224,12 +288,13 @@ function drawClock() {
   //Title
   textFont(geoMidFont);
   textSize(30);
-  text("Coca Cola", 30, 20);
+  image(logoHeader, 30, 20);
+  text("Abarrotes La Poblanita", 30, 60);
 
   //Subtitle
   textFont(geoSmallFont);
   textSize(20);
-  text("Store distribution", 30, 60, (windowWidth / 2) - 50, windowHeight);
+  text("Calle Garrido 66, Villa Gustavo A. Madero, 07000, CDMX", 30, 100, (windowWidth / 2) - 50, windowHeight);
 
   //Clock
   textAlign(RIGHT, TOP);
@@ -287,7 +352,7 @@ function drawClock() {
 
 
 function initializeKeyPoints() {
-    keyPoints.length = 0;
+  keyPoints.length = 0;
 
   for (var i = 0; i < 5; i++) {
     var p = createVector(random(0, windowWidth), random(0, windowHeight));
@@ -353,6 +418,23 @@ function drawItems() {
 }
 
 
+/*
+ *****************************************
+ *****************************************
+ * TABLE METHODS
+ *****************************************
+ *****************************************
+ */
+
+
+function initializeTable() {
+
+
+}
+
+
+
+
 
 
 /*
@@ -366,5 +448,8 @@ function drawItems() {
 function mouseClicked() {
   initializeItems();
   //print("MIAU");
-  //print(((windowWidth / 2) - mouseX) + " :: " + mouseX + " , " + ((windowHeight / 2) - mouseY) + " :: " + mouseY);
+  print(((windowWidth / 2) - mouseX) + " :: " + mouseX + " , " + ((windowHeight / 2) - mouseY) + " :: " + mouseY);
+
+
+
 }
