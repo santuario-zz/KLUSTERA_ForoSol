@@ -52,7 +52,8 @@ var lines = [];
 
 
 // UI
-var showPaths = true;
+var showPaths = false;
+var deltaX = 0;
 
 
 var colors = [];
@@ -266,6 +267,8 @@ function initializePoints() {
 
 
 function drawPoints() {
+  
+   deltaX = mouseX;
 
   // currentPositions.length = 0;
 
@@ -288,6 +291,8 @@ function drawPoints() {
 
     var progress = 0.0;
     var index = 0;
+    
+   
 
 
 
@@ -296,10 +301,10 @@ function drawPoints() {
       var minVal = 3 * windowWidth / 5;
       var maxVal = 4 * windowWidth / 5;
 
-      if (mouseX >= minVal && mouseX < maxVal) {
-        progress = map(mouseX, minVal, maxVal, 0, lines[i].length - 1);
+      if (deltaX >= minVal && deltaX < maxVal) {
+        progress = map(deltaX, minVal, maxVal, 0, lines[i].length - 1);
         index = floor(progress);
-      } else if (mouseX > maxVal) {
+      } else if (deltaX > maxVal) {
         progress = lines[i].length - 2 + 0.99;
         index = lines[i].length - 2;
       }
@@ -309,26 +314,26 @@ function drawPoints() {
       var minVal = 2 * windowWidth / 7;
       var maxVal = 5 * windowWidth / 7;
 
-      if (mouseX >= minVal && mouseX < maxVal) {
-        progress = map(mouseX, minVal, maxVal, 0, lines[i].length - 1);
+      if (deltaX >= minVal && deltaX < maxVal) {
+        progress = map(deltaX, minVal, maxVal, 0, lines[i].length - 1);
         index = floor(progress);
-      } else if (mouseX > maxVal) {
+      } else if (deltaX > maxVal) {
         progress = lines[i].length - 2 + 0.99;
         index = lines[i].length - 2;
       }
 
     } else if (i == 2) {
-      progress = map(mouseX, 0, windowWidth, 0, lines[i].length - 1);
+      progress = map(deltaX, 0, windowWidth, 0, lines[i].length - 1);
       index = floor(progress);
 
     } else if (i == 3) {
-      var minVal = 3 * windowWidth / 5;
-      var maxVal = 4 * windowWidth / 5;
+      var minVal = 2 * windowWidth / 6;
+      var maxVal = 5 * windowWidth / 6;
 
-      if (mouseX >= minVal && mouseX < maxVal) {
-        progress = map(mouseX, minVal, maxVal, 0, lines[i].length - 1);
+      if (deltaX >= minVal && deltaX < maxVal) {
+        progress = map(deltaX, minVal, maxVal, 0, lines[i].length - 1);
         index = floor(progress);
-      } else if (mouseX > maxVal) {
+      } else if (deltaX > maxVal) {
         progress = lines[i].length - 2 + 0.99;
         index = lines[i].length - 2;
       }
@@ -337,10 +342,10 @@ function drawPoints() {
       var minVal = 3 * windowWidth / 8;
       var maxVal = 5 * windowWidth / 8;
 
-      if (mouseX >= minVal && mouseX < maxVal) {
-        progress = map(mouseX, minVal, maxVal, 0, lines[i].length - 1);
+      if (deltaX >= minVal && deltaX < maxVal) {
+        progress = map(deltaX, minVal, maxVal, 0, lines[i].length - 1);
         index = floor(progress);
-      } else if (mouseX > maxVal) {
+      } else if (deltaX > maxVal) {
         progress = lines[i].length - 2 + 0.99;
         index = lines[i].length - 2;
       }
@@ -348,7 +353,7 @@ function drawPoints() {
 
 
 
-      progress = map(mouseX, 0, windowWidth, 0, lines[i].length - 1);
+      progress = map(deltaX, 0, windowWidth, 0, lines[i].length - 1);
       index = floor(progress);
     }
 
@@ -464,8 +469,8 @@ function drawClock() {
   textSize(50);
   var timeText = "";
   var timeSupportText = "";
-  var hourFloat = round(map(mouseX, 0, windowWidth, 0, 23));
-  var minFloat = round(map(mouseX, 0, windowWidth, 0, 1440));
+  var hourFloat = round(map(deltaX, 0, windowWidth, 0, 23));
+  var minFloat = round(map(deltaX, 0, windowWidth, 0, 1440));
   minFloat = minFloat % 60;
 
   var hourText = str(hourFloat);
@@ -680,6 +685,8 @@ function keyPressed() {
     showPaths = !showPaths;
 
   }
+  
+  //deltaX++;
 
   return false;
 }
