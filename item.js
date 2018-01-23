@@ -13,6 +13,7 @@ function Item(_x, _y, _r, _lineID) {
   this.origposition = createVector(_x, _y);
   this.velocity = createVector(0, 0);
   this.holding = false;
+  this.drawing = true;
   this.targetPosition = createVector(0, 0);
   this.discriminator = 1.5;
   this.currentColor = color(255, 255, 255, 255); //blanco
@@ -23,7 +24,7 @@ function Item(_x, _y, _r, _lineID) {
   this.colors.push(color(108, 59, 25, 200));
   this.colors.push(color(254, 216, 47, 200));
   this.colors.push(color(175, 43, 15, 200));
-  this.colors.push(color(170, 48,75, 200));
+  this.colors.push(color(170, 48, 75, 200));
 
 
   this.currentColor = this.colors[int(this.lineID)];
@@ -52,8 +53,11 @@ function Item(_x, _y, _r, _lineID) {
     noStroke();
     fill(this.currentColor);
 
+    if (this.drawing) {
+      ellipse(this.position.x, this.position.y, this.r * 2, this.r * 2);
+    }
 
-    ellipse(this.position.x, this.position.y, this.r * 2, this.r * 2);
+
   }
 
 
@@ -61,7 +65,7 @@ function Item(_x, _y, _r, _lineID) {
     // print(this.targetPosition.x + ", " + this.targetPosition.y);
 
     this.position.add(this.velocity);
-    this.velocity.mult(0.91);
+    this.velocity.mult(0.51);
 
 
     if (this.position.x < this.origposition.x - this.discriminator || this.position.x > this.origposition.x + this.discriminator || this.position.y < this.origposition.y - this.discriminator || this.position.y > this.origposition.y + this.discriminator) {
@@ -76,19 +80,22 @@ function Item(_x, _y, _r, _lineID) {
 
 
   this.checkBoundaryCollision = function() {
-    if (this.position.x > windowWidth - this.r) {
-      this.position.x = windowWidth - this.r;
+    
+    var delta = 50;
+
+    if (this.position.x > windowWidth + delta - this.r) {
+      this.position.x = windowWidth + delta - this.r;
       this.velocity.x *= -1;
-    } else if (this.position.x < this.r) {
-      this.position.x = this.r;
+    } else if (this.position.x < this.r - delta) {
+      this.position.x = this.r - delta;
       this.velocity.x *= -1;
-    } else if (this.position.y > windowHeight - this.r) {
-      this.position.y = windowHeight - this.r;
+    } else if (this.position.y > windowHeight + delta - this.r) {
+      this.position.y = windowHeight + delta - this.r;
       this.velocity.y *= -1;
-    } else if (this.position.y < this.r) {
-      this.position.y = this.r;
+    } else if (this.position.y < this.r - delta) {
+      this.position.y = this.r - delta;
       this.velocity.y *= -1;
-    }
+    } else {}
   }
 
   this.checkCollision = function(_other) {

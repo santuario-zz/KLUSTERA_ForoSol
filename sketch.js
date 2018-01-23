@@ -286,9 +286,74 @@ function drawPoints() {
 
     }
 
+    var progress = 0.0;
+    var index = 0;
 
-    var progress = map(mouseX, 0, windowWidth, 0, lines[i].length - 1);
-    var index = floor(progress);
+
+
+    if (i == 0) {
+
+      var minVal = 3 * windowWidth / 5;
+      var maxVal = 4 * windowWidth / 5;
+
+      if (mouseX >= minVal && mouseX < maxVal) {
+        progress = map(mouseX, minVal, maxVal, 0, lines[i].length - 1);
+        index = floor(progress);
+      } else if (mouseX > maxVal) {
+        progress = lines[i].length - 2 + 0.99;
+        index = lines[i].length - 2;
+      }
+
+
+    } else if (i == 1) {
+      var minVal = 2 * windowWidth / 7;
+      var maxVal = 5 * windowWidth / 7;
+
+      if (mouseX >= minVal && mouseX < maxVal) {
+        progress = map(mouseX, minVal, maxVal, 0, lines[i].length - 1);
+        index = floor(progress);
+      } else if (mouseX > maxVal) {
+        progress = lines[i].length - 2 + 0.99;
+        index = lines[i].length - 2;
+      }
+
+    } else if (i == 2) {
+      progress = map(mouseX, 0, windowWidth, 0, lines[i].length - 1);
+      index = floor(progress);
+
+    } else if (i == 3) {
+      var minVal = 3 * windowWidth / 5;
+      var maxVal = 4 * windowWidth / 5;
+
+      if (mouseX >= minVal && mouseX < maxVal) {
+        progress = map(mouseX, minVal, maxVal, 0, lines[i].length - 1);
+        index = floor(progress);
+      } else if (mouseX > maxVal) {
+        progress = lines[i].length - 2 + 0.99;
+        index = lines[i].length - 2;
+      }
+
+    } else if (i == 4) {
+      var minVal = 3 * windowWidth / 8;
+      var maxVal = 5 * windowWidth / 8;
+
+      if (mouseX >= minVal && mouseX < maxVal) {
+        progress = map(mouseX, minVal, maxVal, 0, lines[i].length - 1);
+        index = floor(progress);
+      } else if (mouseX > maxVal) {
+        progress = lines[i].length - 2 + 0.99;
+        index = lines[i].length - 2;
+      }
+    } else {
+
+
+
+      progress = map(mouseX, 0, windowWidth, 0, lines[i].length - 1);
+      index = floor(progress);
+    }
+
+
+
 
 
 
