@@ -52,7 +52,7 @@ var lines = [];
 
 
 // UI
-var showPaths = false;
+var showPaths = true;
 var deltaX = 0;
 
 
@@ -72,7 +72,7 @@ var colors = [];
 
 function preload() {
   // Backgrund
-  backgroundImage = loadImage("assets/images/MapTepeyacDark.png");
+  backgroundImage = loadImage("assets/images/foro.png");
 
 
   //KeyItems
@@ -113,7 +113,7 @@ function windowResized() {
 function setup() {
 
   createCanvas(displayWidth, displayHeight);
-
+  noCursor();
   initialize();
 }
 
@@ -121,10 +121,10 @@ function draw() {
 
 
   drawBackground();
-  drawLocator();
+  //drawLocator();
   drawPoints();
   drawKeyPoints();
-  drawClock();
+  // drawClock();
   drawItems();
 
 
@@ -267,8 +267,8 @@ function initializePoints() {
 
 
 function drawPoints() {
-  
-   deltaX = mouseX;
+
+  //deltaX = mouseX;
 
   // currentPositions.length = 0;
 
@@ -291,8 +291,8 @@ function drawPoints() {
 
     var progress = 0.0;
     var index = 0;
-    
-   
+
+
 
 
 
@@ -685,7 +685,7 @@ function keyPressed() {
     showPaths = !showPaths;
 
   }
-  
+
   //deltaX++;
 
   return false;

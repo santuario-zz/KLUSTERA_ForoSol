@@ -69,7 +69,7 @@ function Item(_x, _y, _r, _lineID) {
 
 
     if (this.position.x < this.origposition.x - this.discriminator || this.position.x > this.origposition.x + this.discriminator || this.position.y < this.origposition.y - this.discriminator || this.position.y > this.origposition.y + this.discriminator) {
-      var normal = p5.Vector.sub(createVector(this.targetPosition.x, this.targetPosition.y), this.position);
+      var normal = p5.Vector.sub(createVector(mouseX, mouseY), this.position);
       normal.normalize();
       this.velocity.add(normal);
     } else {

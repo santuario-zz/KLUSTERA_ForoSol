@@ -1,97 +1,97 @@
 line,x,y,count,key,totalLines,origin
-1,-85,-662,10,NO,5,Algarín
-1,-208,-374,10,NO,5,Algarín
-1,-254,-198,10,NO,5,Algarín
-1,-274,-29,10,NO,5,Algarín
-1,-302,34,10,YES,5,Algarín
-1,-284,45,10,NO,5,Algarín
-1,-265,31,10,NO,5,Algarín
-1,-190,-17,10,NO,5,Algarín
-1,-100,-22,10,NO,5,Algarín
-1,-84,-63,10,NO,5,Algarín
-1,-12,-37,10,NO,5,Algarín
-1,28,-20,10,NO,5,Algarín
-1,48,-70,10,NO,5,Algarín
-1,9,-86,10,NO,5,Algarín
-2,409,-664,15,NO,5,Centro Histórico
-2,124,83,15,NO,5,Centro Histórico
-2,10,40,15,NO,5,Centro Histórico
-2,22,11,15,NO,5,Centro Histórico
-2,116,39,15,NO,5,Centro Histórico
-2,120,22,15,NO,5,Centro Histórico
-2,131,11,15,NO,5,Centro Histórico
-2,127,1,15,NO,5,Centro Histórico
-2,93,1,15,NO,5,Centro Histórico
-2,65,-4,15,YES,5,Centro Histórico
-2,26,-9,15,NO,5,Centro Histórico
-2,31,-22,15,NO,5,Centro Histórico
-2,-85,-65,15,NO,5,Centro Histórico
-2,-53,-150,15,NO,5,Centro Histórico
-2,182,-64,15,NO,5,Centro Histórico
-3,-61.5,38.5,7,NO,5,GAM
-3,-49.5,9.5,7,NO,5,GAM
-3,-70.5,-2.5,7,NO,5,GAM
-3,-82.5,30.5,7,NO,5,GAM
-3,-61.5,39.5,7,NO,5,GAM
-3,-50.5,9.5,7,NO,5,GAM
-3,-71.5,-3.5,7,NO,5,GAM
-3,-82.5,29.5,7,NO,5,GAM
-3,-62.5,38.5,7,NO,5,GAM
-3,-49.5,8.5,7,NO,5,GAM
-3,-100.5,-19.5,7,NO,5,GAM
-3,-84.5,-65.5,7,NO,5,GAM
-3,29.5,-22.5,7,NO,5,GAM
-3,9.5,39.5,7,NO,5,GAM
-3,-47.5,10.5,7,NO,5,GAM
-3,-72.5,73.5,7,NO,5,GAM
-3,-97.5,67.5,7,NO,5,GAM
-3,-71.5,-1.5,7,NO,5,GAM
-3,9.5,38.5,7,NO,5,GAM
-3,28.5,-23.5,7,NO,5,GAM
-3,-46.5,-48.5,7,NO,5,GAM
-3,-56.5,-24.5,7,NO,5,GAM
-3,-62.5,-26.5,7,NO,5,GAM
-3,-92.5,-47.5,7,NO,5,GAM
-3,-101.5,-20.5,7,NO,5,GAM
-3,-49.5,9.5,7,NO,5,GAM
-4,-77,-90,5,NO,5,Telesecundaria No. 94
-4,-41,-75,5,NO,5,Telesecundaria No. 94
-4,-48,-52,5,NO,5,Telesecundaria No. 94
-4,29,-22,5,NO,5,Telesecundaria No. 94
-4,90,-181,5,NO,5,Telesecundaria No. 94
-4,273,-118,5,NO,5,Telesecundaria No. 94
-4,318,-88,5,NO,5,Telesecundaria No. 94
-4,387,-65,5,NO,5,Telesecundaria No. 94
-4,459,-44,5,NO,5,Telesecundaria No. 94
-4,478,-35,5,NO,5,Telesecundaria No. 94
-4,503,-35,5,NO,5,Telesecundaria No. 94
-4,542,-6,5,NO,5,Telesecundaria No. 94
-4,267,349,5,NO,5,Telesecundaria No. 94
-4,367,449,5,NO,5,Telesecundaria No. 94
-4,1367,449,5,NO,5,Telesecundaria No. 94
-4,367,449,5,NO,5,Telesecundaria No. 94
-4,267,349,5,NO,5,Telesecundaria No. 94
-4,364,222,5,NO,5,Telesecundaria No. 94
-4,173,142,5,NO,5,Telesecundaria No. 94
-4,201,65,5,NO,5,Telesecundaria No. 94
-4,52,19,5,NO,5,Telesecundaria No. 94
-4,41,48,5,NO,5,Telesecundaria No. 94
-4,8,35,5,NO,5,Telesecundaria No. 94
-4,27,-24,5,NO,5,Telesecundaria No. 94
-4,-48,-54,5,NO,5,Telesecundaria No. 94
-4,-32,-100,5,NO,5,Telesecundaria No. 94
-5,-5,-170,12,NO,5,UNAM
-5,36,-152,12,NO,5,UNAM
-5,-6,-37,12,NO,5,UNAM
-5,28,-22,12,NO,5,UNAM
-5,8,38,12,NO,5,UNAM
-5,123,83,12,NO,5,UNAM
-5,207,-134,12,NO,5,UNAM
-5,275,-117,12,NO,5,UNAM
-5,317,-89,12,NO,5,UNAM
-5,462,-43,12,NO,5,UNAM
-5,477,-35,12,NO,5,UNAM
-5,504,-35,12,NO,5,UNAM
-5,542,-5,12,NO,5,UNAM
-5,605,-89,12,NO,5,UNAM
-5,705,-100,12,NO,5,UNAM
+1,-85,-662,10,NO,1,Algarín
+1,-208,-374,10,NO,1,Algarín
+1,-254,-198,10,NO,1,Algarín
+1,-274,-29,10,NO,1,Algarín
+1,-302,34,10,YES,1,Algarín
+1,-284,45,10,NO,1,Algarín
+1,-265,31,10,NO,1,Algarín
+1,-190,-17,10,NO,1,Algarín
+1,-100,-22,10,NO,1,Algarín
+1,-84,-63,10,NO,1,Algarín
+1,-12,-37,10,NO,1,Algarín
+1,28,-20,10,NO,1,Algarín
+1,48,-70,10,NO,1,Algarín
+1,9,-86,10,NO,1,Algarín
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
