@@ -598,12 +598,14 @@ function initializeItems() {
   for (var i = 0; i < table.getNum(0, 5); i++) {
 
     var itemsTMP = [];
+    
 
-    for (var j = 0; j < lines[i][0].getNum("count"); j++) {
 
-      var s = floor(random(2, 10));
+    for (var j = 0; j < 50; j++) {
+
+      var s = floor(random(2, 5));
       //itemsTMP.push(new Item(windowWidth / 2 - lines[i][0].getNum("x"), windowHeight / 2 - lines[i][0].getNum("y")));
-      itemsTMP.push(new Item(floor(random(s, windowWidth - s)), floor(random(s, windowHeight - s)), s, lines[i][j].getString("line")));
+      itemsTMP.push(new Item(floor(random(windowWidth/2, windowWidth - s)), floor(random(windowHeight/2, windowHeight - s)), s, lines[i][0].getString("line")));
       //itemsTMP.push(new Item(currentPositions[i].x,currentPositions[i].y));
 
     }
