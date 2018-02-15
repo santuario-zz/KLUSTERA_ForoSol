@@ -601,7 +601,7 @@ function initializeItems() {
     
 
 
-    for (var j = 0; j < 50; j++) {
+    for (var j = 0; j < 10; j++) {
 
       var s = floor(random(2, 5));
       //itemsTMP.push(new Item(windowWidth / 2 - lines[i][0].getNum("x"), windowHeight / 2 - lines[i][0].getNum("y")));
